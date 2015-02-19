@@ -15,7 +15,10 @@
         "bin-dir": "bin"
     },
     "require": {
-        "ruflin/elastica": "~1.2.1.0"
+        "php": ">=5.4.0",
+        "ext-memcached": "*",
+        "ruflin/elastica": "~1.2.1.0",
+        "psr/log": "~1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
