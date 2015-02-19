@@ -23,7 +23,7 @@ Vaffel\Dao\DaoFactory::setServiceLayer(
 );
 ```
 
-In addition to the RO and RW MySQL service, elasticsearch and memcached service layers needs to be set ut;
+In addition to the RO and RW MySQL service, elasticsearch and memcached service layers needs to be set up;
 
 ```php
 Vaffel\Dao\DaoFactory::setServiceLayer(
