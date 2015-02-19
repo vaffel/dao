@@ -3,11 +3,11 @@
   bootstrap="tests/bootstrap.php">
   <testsuites>
     <testsuite name="unit">
-      <directory>tests/UnitTest</directory>
+      <directory>tests/DaoTest</directory>
     </testsuite>
 
     <testsuite name="integration">
-      <directory>tests/IntegrationTest</directory>
+      <directory>tests/DaoIntegrationTest</directory>
     </testsuite>
   </testsuites>
 
@@ -25,13 +25,13 @@
     <const name="DAO_DB_RO_USER" value="" />
     <const name="DAO_DB_RO_PASS" value="" />
 
-    <const name="DAO_ELASTIC_SEARCH_HOST" value="" />
-    <const name="DAO_ELASTIC_SEARCH_PORT" value="" />
+    <const name="DAO_ELASTIC_SEARCH_HOST" value="localhost" />
+    <const name="DAO_ELASTIC_SEARCH_PORT" value="9200" />
     <!-- NOTE: The index name must be lowercased -->
     <const name="DAO_ELASTIC_SEARCH_INDEX" value="" />
 
-    <const name="DAO_MEMCACHED_HOST" value="" />
-    <const name="DAO_MEMCACHED_PORT" value="" />
+    <const name="DAO_MEMCACHED_HOST" value="localhost" />
+    <const name="DAO_MEMCACHED_PORT" value="11211" />
   </php>
 
   <logging>
