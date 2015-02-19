@@ -14,8 +14,17 @@
     "config": {
         "bin-dir": "bin"
     },
-    "require": {},
+    "require": {
+        "ruflin/elastica": "~1.2.1.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vaffel\\Dao\\": "src",
+            "Vaffel\\DaoUnitTest\\": "tests/DaoUnitTest",
+            "Vaffel\\DaoIntegrationTest\\": "tests/DaoIntegrationTest"
+        }
     }
 }
