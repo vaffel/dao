@@ -2,7 +2,7 @@
 The DAO library makes interacting with database objects easy and abstracts away the hassle of keeping memcached and elasticsearch data up to date when making changes to the data.
 
 # Installation
-Add `"vafel\dao": "dev-master"` to the dependencies list of your project.
+Add `"vafel/dao": "dev-master"` to the dependencies list of your project.
 
 # Setup
 Before the DaoFactory is used to retrieve DAO instances, the DAO must be set up;
