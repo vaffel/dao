@@ -65,15 +65,15 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
         }
 
         $constants = [
-            'DAO_DB_HOST',
-            'DAO_DB_PORT',
-            'DAO_DB_NAME',
+            'DAO_MYSQL_HOST',
+            'DAO_MYSQL_PORT',
+            'DAO_MYSQL_NAME',
 
-            'DAO_DB_RO_USER',
-            'DAO_DB_RO_PASS',
+            'DAO_MYSQL_RO_USER',
+            'DAO_MYSQL_RO_PASS',
 
-            'DAO_DB_RW_USER',
-            'DAO_DB_RW_PASS',
+            'DAO_MYSQL_RW_USER',
+            'DAO_MYSQL_RW_PASS',
 
             'DAO_ELASTIC_SEARCH_HOST',
             'DAO_ELASTIC_SEARCH_PORT',
@@ -91,14 +91,14 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
         $roDb = new PDO(
             $this->getDsn(),
-            DAO_DB_RO_USER,
-            DAO_DB_RO_PASS
+            DAO_MYSQL_RO_USER,
+            DAO_MYSQL_RO_PASS
         );
 
         $rwDb = new PDO(
             $this->getDsn(),
-            DAO_DB_RW_USER,
-            DAO_DB_RW_PASS
+            DAO_MYSQL_RW_USER,
+            DAO_MYSQL_RW_PASS
         );
 
         $memcached = new Memcached();
@@ -339,8 +339,8 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
     private function getDsn()
     {
-        $dsn  = 'mysql:host=' . DAO_DB_HOST . ';port=' . DAO_DB_PORT;
-        $dsn .= ';dbname=' . DAO_DB_NAME . ';';
+        $dsn  = 'mysql:host=' . DAO_MYSQL_HOST . ';port=' . DAO_MYSQL_PORT;
+        $dsn .= ';dbname=' . DAO_MYSQL_NAME . ';';
 
         return $dsn;
     }
