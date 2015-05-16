@@ -13,43 +13,13 @@ use Vaffel\Dao\DaoFactory;
 use Elastica\Client as ElasticaClient;
 use Elastica\Document;
 
-class TestModel extends ModelAbstract
-{
-    public $id;
-}
-
-class DateAwareTestModel extends ModelAbstract implements DateAwareModel
-{
-    use DateAwareModelTrait;
-
-    public $id;
-}
-
-class IndexableTestModel extends TestModel implements Indexable
-{
-    public function getIndexableDocument()
-    {
-        return new Document($this->id, $this->getState());
-    }
-
-    public function getIndexName()
-    {
-        return defined('DAO_ELASTIC_SEARCH_INDEX') ? DAO_ELASTIC_SEARCH_INDEX : 'daoTest';
-    }
-
-    public function getIndexType()
-    {
-        return 'daoTestType';
-    }
-}
-
-class DaoTestModel extends MySQL
+class MySQLDaoTestModel extends MySQL
 {
     protected $modelName = 'Vaffel\DaoIntegrationTest\Models\Dao\TestModel';
     protected $tableName = 'daoTests';
 }
 
-class MySQLTest extends \PHPUnit_Framework_TestCase
+class MySQLTest extends BaseTest
 {
 
     private $daoModel;
@@ -65,15 +35,15 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
         }
 
         $constants = [
-            'DAO_DB_HOST',
-            'DAO_DB_PORT',
-            'DAO_DB_NAME',
+            'DAO_MYSQL_HOST',
+            'DAO_MYSQL_PORT',
+            'DAO_MYSQL_NAME',
 
-            'DAO_DB_RO_USER',
-            'DAO_DB_RO_PASS',
+            'DAO_MYSQL_RO_USER',
+            'DAO_MYSQL_RO_PASS',
 
-            'DAO_DB_RW_USER',
-            'DAO_DB_RW_PASS',
+            'DAO_MYSQL_RW_USER',
+            'DAO_MYSQL_RW_PASS',
 
             'DAO_ELASTIC_SEARCH_HOST',
             'DAO_ELASTIC_SEARCH_PORT',
@@ -91,14 +61,14 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
         $roDb = new PDO(
             $this->getDsn(),
-            DAO_DB_RO_USER,
-            DAO_DB_RO_PASS
+            DAO_MYSQL_RO_USER,
+            DAO_MYSQL_RO_PASS
         );
 
         $rwDb = new PDO(
             $this->getDsn(),
-            DAO_DB_RW_USER,
-            DAO_DB_RW_PASS
+            DAO_MYSQL_RW_USER,
+            DAO_MYSQL_RW_PASS
         );
 
         $memcached = new Memcached();
@@ -125,10 +95,10 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
         DaoFactory::setServiceLayer(DaoFactory::SERVICE_MEMCACHED, $memcached);
         DaoFactory::setServiceLayer(DaoFactory::SERVICE_ELASTIC_SEARCH, $elastic);
 
-        $this->daoModel = new DaoTestModel();
+        $this->daoModel = new MySQLDaoTestModel();
         $this->daoModel->setModelname('Vaffel\DaoIntegrationTest\Models\Dao\TestModel');
 
-        $this->daoDateAwareModel = new DaoTestModel();
+        $this->daoDateAwareModel = new MySQLDaoTestModel();
         $this->daoDateAwareModel->setModelname('Vaffel\DaoIntegrationTest\Models\Dao\DateAwareTestModel');
     }
 
@@ -339,8 +309,8 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
     private function getDsn()
     {
-        $dsn  = 'mysql:host=' . DAO_DB_HOST . ';port=' . DAO_DB_PORT;
-        $dsn .= ';dbname=' . DAO_DB_NAME . ';';
+        $dsn  = 'mysql:host=' . DAO_MYSQL_HOST . ';port=' . DAO_MYSQL_PORT;
+        $dsn .= ';dbname=' . DAO_MYSQL_NAME . ';';
 
         return $dsn;
     }
