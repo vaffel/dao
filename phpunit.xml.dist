@@ -24,10 +24,14 @@
     <!-- NOTE: The RW user needs CREATE TABLE and DROP TABLE access -->
     <const name="DAO_MYSQL_RW_USER" value="" />
     <const name="DAO_MYSQL_RW_PASS" value="" />
+    <const name="DAO_MONGO_RW_USER" value="" />
+    <const name="DAO_MONGO_RW_PASS" value="" />
 
     <!-- NOTE: The RO user needs read access to the 'daoTest' table -->
     <const name="DAO_MYSQL_RO_USER" value="" />
     <const name="DAO_MYSQL_RO_PASS" value="" />
+    <const name="DAO_MONGO_RO_USER" value="" />
+    <const name="DAO_MONGO_RO_PASS" value="" />
 
     <const name="DAO_ELASTIC_SEARCH_HOST" value="localhost" />
     <const name="DAO_ELASTIC_SEARCH_PORT" value="9200" />
