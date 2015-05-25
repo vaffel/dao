@@ -297,14 +297,6 @@ class MySQLTest extends BaseTest
         $this->assertSame(0, $this->getElasticIndex()->count());
     }
 
-    private function getElasticIndex()
-    {
-        $indexName = defined('DAO_ELASTIC_SEARCH_INDEX') ? DAO_ELASTIC_SEARCH_INDEX : 'daoTest';
-        $elastic = DaoFactory::getServiceLayer(DaoFactory::SERVICE_ELASTIC_SEARCH);
-
-        return $elastic->getIndex($indexName);
-    }
-
     private function getDsn()
     {
         $dsn  = 'mysql:host=' . DAO_MYSQL_HOST . ';port=' . DAO_MYSQL_PORT;

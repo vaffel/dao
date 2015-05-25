@@ -2,6 +2,7 @@
 namespace Vaffel\DaoIntegrationTest\Models\Dao;
 
 use Elastica\Document;
+use Vaffel\Dao\DaoFactory;
 use Vaffel\Dao\Models\ModelAbstract;
 use Vaffel\Dao\Models\Interfaces\Indexable;
 use Vaffel\Dao\Models\Interfaces\DateAwareModel;
@@ -11,6 +12,8 @@ class TestModel extends ModelAbstract
 {
     public $id;
 }
+
+class MongoTestModel extends ModelAbstract {}
 
 class DateAwareTestModel extends ModelAbstract implements DateAwareModel
 {
@@ -39,4 +42,11 @@ class IndexableTestModel extends TestModel implements Indexable
 
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {
+    protected function getElasticIndex()
+    {
+        $indexName = defined('DAO_ELASTIC_SEARCH_INDEX') ? DAO_ELASTIC_SEARCH_INDEX : 'daoTest';
+        $elastic = DaoFactory::getServiceLayer(DaoFactory::SERVICE_ELASTIC_SEARCH);
+
+        return $elastic->getIndex($indexName);
+    }
 }
