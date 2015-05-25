@@ -90,17 +90,6 @@ abstract class Mongo extends DaoAbstract
     }
 
     /**
-     * Fetch multiple entries from database
-     *
-     * @param array(MongoId|string) $ids
-     * @return array
-     */
-    public function fetchMultiple($ids)
-    {
-        return $this->fetchFromDb($ids);
-    }
-
-    /**
      * Create MongoId-instances from an array of strings
      *
      * @param array $ids Array of strings
