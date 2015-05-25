@@ -25,11 +25,19 @@ abstract class ModelAbstract implements JsonSerializable, ArrayAccess
     /**
      * Get the ID of this element
      *
-     * @return int
+     * @return mixed
      */
     public function getId()
     {
-        return (int) $this->id;
+        if (property_exists($this, '_id')) {
+            return $this->_id;
+        }
+
+        if (property_exists($this, 'id')) {
+            return (int) $this->id;
+        }
+
+        return null;
     }
 
     /**
