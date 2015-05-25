@@ -131,4 +131,92 @@ class MongoTest extends BaseTest
         $entries = $this->daoModel->fetchEntries();
         $this->assertCount(1, $entries);
     }
+
+    public function testCanUpdateEntry()
+    {
+        $model = new MongoTestModel();
+        $model->setStrField('foobar');
+        $this->daoModel->save($model);
+
+        $prevId = $model->getId();
+        $this->assertGreaterThan(0, strlen($model->getId()));
+
+        $model->setStrField('Something');
+        $this->daoModel->save($model);
+
+        $newId = $model->getId();
+        $this->assertSame($prevId, $newId);
+
+        $entries = $this->daoModel->fetchEntries();
+        $this->assertCount(1, $entries);
+    }
+
+    public function testCanFetchSingleModel()
+    {
+        $model = new MongoTestModel();
+        $model->setStrField('foobar');
+        $this->daoModel->save($model);
+
+        $fetchedModel =  $this->daoModel->fetch($model->getId());
+        $this->assertSame('foobar', $fetchedModel->getStrField());
+    }
+
+    public function testCanFetchMultipleModelsByIds()
+    {
+        $ids = [];
+
+        for ($i = 0; $i < 2; $i++) {
+            $model = new MongoTestModel();
+            $model->setStrField('foobar');
+            $this->daoModel->save($model);
+
+            $ids[] = (string) $model->getId();
+        }
+
+        $fetchedModels = $this->daoModel->fetchByIds($ids);
+
+        $this->assertEquals($ids, array_keys($fetchedModels));
+    }
+
+    public function testCanFetchSingleModelUsingFetchByIds()
+    {
+        $model = new MongoTestModel();
+        $model->setStrField('foobar');
+        $this->daoModel->save($model);
+
+        $fetchedModel = $this->daoModel->fetchByIds($model->getId());
+
+        $this->assertEquals(
+            (string) $fetchedModel->getId(),
+            (string) $model->getId()
+        );
+    }
+
+    public function testCanCountCorrectNumberOfEntries()
+    {
+        $this->assertSame(0, $this->daoModel->getNumberOfEntries());
+
+        $model = new TestModel();
+        $model->setStrField('foobar');
+        $this->daoModel->save($model);
+
+        $this->assertSame(1, $this->daoModel->getNumberOfEntries());
+    }
+
+    public function testCanDeleteModel()
+    {
+        $model = new TestModel();
+        $model->setStrField('foobar');
+
+        // Check that we're starting with empty collection
+        $this->assertCount(0, $this->daoModel->fetchEntries());
+
+        // Save and check that the item count has increased
+        $this->daoModel->save($model);
+        $this->assertCount(1, $this->daoModel->fetchEntries());
+
+        // Delete the item and check that the count has decreased
+        $this->daoModel->delete($model);
+        $this->assertCount(0, $this->daoModel->fetchEntries());
+    }
 }
