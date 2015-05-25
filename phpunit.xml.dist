@@ -17,8 +17,8 @@
     <const name="DAO_MYSQL_PORT" value="" />
     <const name="DAO_MYSQL_NAME" value="" />
 
-    <const name="DAO_MONGO_HOST" value="" />
-    <const name="DAO_MONGO_PORT" value="" />
+    <const name="DAO_MONGO_HOST" value="localhost" />
+    <const name="DAO_MONGO_PORT" value="27017" />
     <const name="DAO_MONGO_NAME" value="" />
 
     <!-- NOTE: The RW user needs CREATE TABLE and DROP TABLE access -->
