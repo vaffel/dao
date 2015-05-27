@@ -11,6 +11,7 @@ class DaoFactory
      * @var string
      */
     const SERVICE_MYSQL          = 'mysql';
+    const SERVICE_MONGO          = 'mongo';
     const SERVICE_MEMCACHED      = 'memcached';
     const SERVICE_ELASTIC_SEARCH = 'elastic';
 
