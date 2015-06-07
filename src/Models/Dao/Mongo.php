@@ -152,7 +152,7 @@ abstract class Mongo extends DaoAbstract
             // Perform actual insertion
             try {
                 $result = $this->collection->insert($state, array(
-                    'safe' => true
+                    'w' => 1
                 ));
             } catch (MongoException $e) {
                 trigger_error($e->getMessage(), E_USER_WARNING);
