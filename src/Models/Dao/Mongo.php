@@ -151,9 +151,7 @@ abstract class Mongo extends DaoAbstract
         } else {
             // Perform actual insertion
             try {
-                $result = $this->collection->insert($state, array(
-                    'safe' => true
-                ));
+                $result = $this->collection->insert($state);
             } catch (MongoException $e) {
                 trigger_error($e->getMessage(), E_USER_WARNING);
                 trigger_error('Failed to save model to collection "' . $this->collectionName . '"', E_USER_WARNING);
